@@ -1,6 +1,3 @@
-# portfolio
-Portfolio de Lenzo TOLUAFE
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
