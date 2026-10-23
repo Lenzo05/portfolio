@@ -282,7 +282,7 @@ dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
 
 <script>
 /* photo : essaie plusieurs noms et dossiers */
-(function(){var im=document.getElementById("pimg"),n=["images/photo.png","images/photo.jpg","images/photo.jpeg","images/photo.webp","images/Photo.png","images/Photo.jpg","photo.png","photo.jpg","photo.jpeg","image/photo.png","img/photo.png","assets/photo.png"],i=0;
+(function(){var im=document.getElementById("pimg"),n=["Images/photo.png","Images/photo.jpg","Images/photo.jpeg","Images/photo.webp","Images/Photo.png","Images/Photo.jpg","photo.png","photo.jpg","photo.jpeg","image/photo.png","img/photo.png","assets/photo.png"],i=0;
 function nx(){if(i>=n.length){im.remove();return}im.src=n[i++]}
 im.onload=function(){im.classList.add("ok")};im.onerror=nx;nx()})();
 
@@ -314,8 +314,8 @@ S32:[["Livrable 1 · État des lieux","1XzG7arAEUGbw4EtCa7cbFmhuCcMrCUrJ"],["Liv
 S33:[["Livrable 1 · Avant toute manipulation","1w8M0UjnyJ5nDIiEd7lb3vOkLghFnvbk5"],["Livrable 2 · Mise en œuvre","18DYAY1Z768jnYt4jwAc0IXzRYa1YpLfE"],["Livrables 3 et 4 · Tests et incident","1A4pJSylaxueLPin3vo6GAmQPrCa4BQJh"]],
 E5:[["Guide du projet d'alternance IFR-LZO-DEV-01 (v3)","1Cs5fWgHjOHD5YrZMajNSyRUAwmIsA2qa"]]};
 var P={
-rocky:{t:"Durcissement Rocky Linux 10",ic:"fa-server",tags:["Linux","Sécurité","Alternance"],s:"Sécurisation d'une VM en 6 phases, puis stack LEMP et WordPress.",w:"E5",img:"images/rocky-install.png",
- d:"Installer une VM Rocky Linux 10.1 sur vSphere, la durcir, l'intégrer à l'Active Directory et lui faire héberger WordPress. Un snapshot après chaque phase.",l:["Installation et LVM","Mise à jour et outils","SELinux, PAM, audit, SNMP, firewalld","sysctl, services, cron, SSH","Compte de service SNOW et sudo","IP fixe, certificat, jonction AD","Nginx, MariaDB, PHP-FPM, WordPress"],i:["images/rocky-install.png","images/rocky-selinux.png","images/rocky-firewall.png","images/rocky-ad-join.png"]},
+rocky:{t:"Durcissement Rocky Linux 10",ic:"fa-server",tags:["Linux","Sécurité","Alternance"],s:"Sécurisation d'une VM en 6 phases, puis stack LEMP et WordPress.",w:"E5",img:"Images/rocky-install.png",
+ d:"Installer une VM Rocky Linux 10.1 sur vSphere, la durcir, l'intégrer à l'Active Directory et lui faire héberger WordPress. Un snapshot après chaque phase.",l:["Installation et LVM","Mise à jour et outils","SELinux, PAM, audit, SNMP, firewalld","sysctl, services, cron, SSH","Compte de service SNOW et sudo","IP fixe, certificat, jonction AD","Nginx, MariaDB, PHP-FPM, WordPress"],i:["Images/rocky-install.png","Images/rocky-selinux.png","Images/rocky-firewall.png","Images/rocky-ad-join.png"]},
 tp28:{t:"MikroTik · restriction du laboratoire",ic:"fa-ban",tags:["Réseau","Sécurité"],s:"Une règle de pare-feu coupe la sortie du laboratoire par ether1.",w:"S28",d:"Empêcher 192.168.40.0/24 de sortir par ether1 sur un RB2011 (RouterOS 6.49.20), 24 → 28 août 2026.",l:["Chaîne forward, source 192.168.40.0/24, sortie ether1, drop","Vérification : règles et journal LAB-BLOCK","Retour arrière par le commentaire de la règle","Export .rsc, route par défaut et NAT rétablis"]},
 tp29:{t:"ER605 · isolement du laboratoire",ic:"fa-layer-group",tags:["Réseau","Sécurité"],s:"Quatre VLAN et deux ACL pour isoler le laboratoire.",w:"S29",d:"Segmenter en 4 VLAN sur un TP-Link ER605 et isoler le laboratoire, en gardant son accès Internet.",l:["VLAN 10 infrastructure, 20 SISR, 30 SLAM, 40 laboratoire","ACL LAB_DENY_SISR et LAB_DENY_SERVEURS","Règle désactivée puis recréée, avec rapport","Restauration en 5 minutes"]},
 tp31:{t:"Cisco 881 · ACL service Web",ic:"fa-globe",tags:["Réseau","Sécurité"],s:"Une ACL étendue ne laisse passer que HTTP et HTTPS.",w:"S31",d:"Ne laisser passer que le web entre SISR (VLAN 20) et l'infrastructure (VLAN 10), sur un routeur Cisco 881.",l:["Interface Fa4 remontée, ancienne ACL supprimée","ACL_SISR_WEB_ONLY : HTTP et HTTPS vers 172.16.10.10","Autres flux vers l'infrastructure bloqués","Commandes préparées, exécutées, puis restauration"]},
@@ -324,7 +324,7 @@ tp33:{t:"MikroTik · isolement par filtrage",ic:"fa-fire",tags:["Réseau","Sécu
 function esc(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
 function show(h){document.getElementById("dbody").innerHTML=h;if(!dlg.open)dlg.showModal()}
 function openP(k){var p=P[k],h='<h2>'+esc(p.t)+'</h2><p>'+esc(p.d)+'</p><h4>DÉROULÉ</h4><ul>'+p.l.map(function(x){return'<li>'+esc(x)+'</li>'}).join("")+'</ul>';
- var gi=p.i||[1,2,3,4].map(function(n){return'images/'+k+'-'+n+'.png'});h+='<h4>CAPTURES</h4><div class="gal">'+gi.map(function(u){return'<img src="'+u+'" alt="Capture" loading="lazy" data-z="'+u+'" onerror="this.remove()">'}).join("")+'</div>';
+ var gi=p.i||[1,2,3,4].map(function(n){return'Images/'+k+'-'+n+'.png'});h+='<h4>CAPTURES</h4><div class="gal">'+gi.map(function(u){return'<img src="'+u+'" alt="Capture" loading="lazy" data-z="'+u+'" onerror="this.remove()">'}).join("")+'</div>';
  var d=DOCS[p.w||""];h+='<h4>DOCUMENTS</h4>';
  h+=d?d.map(function(x){return'<a class="doc" href="'+F+x[1]+'/view" target="_blank" rel="noopener"><span>'+esc(x[0])+'</span><em>Ouvrir ↗</em></a>'}).join(""):'<p>Aucun document déposé pour l\'instant.</p>';
  show(h)}
@@ -335,9 +335,9 @@ var pg=document.getElementById("pgrid");
 Object.keys(P).forEach(function(k){var p=P[k],b=document.createElement("button");b.className="glass project-card";
  b.innerHTML='<div class="project-image"><i class="fas '+p.ic+'"></i><img alt="" loading="lazy"></div><div class="project-content"><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p><div class="project-tags">'+p.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'<span class="tag tag-learn-more">En savoir plus...</span></div></div>';
  b.onclick=function(){openP(k)};pg.appendChild(b);cover(b.querySelector('img'),k,p.img)});
-function cover(im,k,first){var c=['png','jpg','jpeg','webp'].map(function(e){return'images/'+k+'.'+e});if(first)c.unshift(first);var i=0;im.onerror=function(){if(i>=c.length)im.remove();else im.src=c[i++]};im.onerror()}
-/* images de certifications et logos : cherche dans images/, images/certifications/, certifications/ et à la racine */
-function find(im,names){var bs=['images/','images/certifications/','certifications/',''],es=['png','jpg','jpeg','webp'],c=[];names.split(',').forEach(function(n){bs.forEach(function(b){es.forEach(function(e){c.push(b+n+'.'+e)})})});var i=0;im.onerror=function(){if(i>=c.length){im.remove()}else im.src=c[i++]};im.onerror()}
+function cover(im,k,first){var c=['png','jpg','jpeg','webp'].map(function(e){return'Images/'+k+'.'+e});if(first)c.unshift(first);var i=0;im.onerror=function(){if(i>=c.length)im.remove();else im.src=c[i++]};im.onerror()}
+/* images de certifications et logos : cherche dans Images/, Images/certifications/, certifications/ et à la racine */
+function find(im,names){var bs=['Images/','Images/certifications/','certifications/',''],es=['png','jpg','jpeg','webp'],c=[];names.split(',').forEach(function(n){bs.forEach(function(b){es.forEach(function(e){c.push(b+n+'.'+e)})})});var i=0;im.onerror=function(){if(i>=c.length){im.remove()}else im.src=c[i++]};im.onerror()}
 document.querySelectorAll('img[data-f]').forEach(function(im){find(im,im.dataset.f);if(im.classList.contains('cert-img'))im.addEventListener('click',function(){lbi.src=im.src;lbd.showModal()})});
 /* CV : cherche le PDF sous plusieurs noms quand le site est en ligne */
 (function(){var cv=document.querySelectorAll('a[href*="CV_Lenzo"]');cv.forEach(function(a){a.target="_blank";a.rel="noopener"});
