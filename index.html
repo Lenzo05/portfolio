@@ -1,11 +1,346 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Lenzo</title>
-  <link rel="stylesheet"href"style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio BTS SIO SISR - Lenzo TOLUAFE</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1020;--glass:rgba(255,255,255,.06);--gb:rgba(255,255,255,.12);--ink:#eef2fb;--muted:#a3b0cc;--a:#4f8cff;--b:#22d3ee;--nav:rgba(11,16,32,.7);--r:18px}
+[data-theme=light]{--bg:#eef3fb;--glass:rgba(255,255,255,.7);--gb:rgba(20,40,90,.12);--ink:#0e1a33;--muted:#4a5a7a;--nav:rgba(238,243,251,.8)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font:400 16px/1.6 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.bg-blobs{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35}
+.blob-1{width:480px;height:480px;background:var(--a);top:-120px;left:-100px}
+.blob-2{width:420px;height:420px;background:var(--b);top:40%;right:-120px}
+.blob-3{width:380px;height:380px;background:#8b5cf6;bottom:-100px;left:30%}
+[data-theme=light] .blob{opacity:.25}
+.container{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+.section-title{font-size:40px;font-weight:800;text-align:center;margin-bottom:40px;letter-spacing:-.02em}
+.glass{background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+h3{font-size:20px;font-weight:700}
+.muted,p{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 14px Inter;padding:11px 20px;border-radius:999px;border:1px solid var(--gb);background:var(--glass);color:var(--ink);cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--a),var(--b));border:0;color:#fff}
+
+/* navbar */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:50;background:var(--nav);backdrop-filter:blur(16px);border-bottom:1px solid var(--gb)}
+.nav-container{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-weight:800;font-size:18px}
+.nav-logo b{color:var(--b)}
+.nav-menu{display:flex;list-style:none;gap:2px;align-items:center}
+.nav-link{padding:8px 11px;border-radius:999px;font-size:14px;font-weight:500;color:var(--muted)}
+.nav-link:hover,.nav-link.active{color:var(--ink);background:var(--glass)}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--gb);background:var(--glass);color:var(--ink);cursor:pointer}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:0;padding:8px}
+.hamburger span{width:24px;height:2px;background:var(--ink);display:block}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:100px}
+.hero-content{display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:center}
+.hero-name{display:block;font-size:56px;font-weight:800;line-height:1.05;letter-spacing:-.03em}
+.hero-name span:last-child{display:block;background:linear-gradient(135deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-subtitle{display:block;margin-top:16px;font-size:14px;font-weight:600;letter-spacing:.14em;color:var(--b)}
+.hero-description{margin:16px 0 28px;font-size:18px;max-width:50ch}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:12px}
+.photo{position:relative;aspect-ratio:1/1;border-radius:var(--r);overflow:hidden;background:var(--glass);border:1px solid var(--gb)}
+.photo span{position:absolute;inset:0;display:grid;place-items:center;font:800 64px Inter;color:var(--a);opacity:.4}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%;opacity:0;transition:opacity .3s}
+.photo img.ok{opacity:1}
+
+/* à propos */
+.about-content{display:grid;grid-template-columns:1fr 1.3fr;gap:32px;align-items:start}
+.about-text{padding:28px;display:grid;gap:14px}
+.skills h4{font-size:20px;margin-bottom:14px}
+.skill-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.skill-card{padding:18px 14px;text-align:center;display:grid;gap:8px;justify-items:center;cursor:pointer;background:var(--glass);border:1px solid var(--gb);border-radius:var(--r);color:var(--ink);font:inherit}
+.skill-card:hover{border-color:var(--b);transform:translateY(-3px)}
+.skill-card i{font-size:24px;color:var(--b)}
+.skill-name{font-weight:600;font-size:14px}
+.more{font-size:12px;color:var(--a)}
+
+/* slider */
+.track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px}
+.track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 min(340px,85%);scroll-snap-align:start;padding:24px;display:grid;gap:10px;align-content:start}
+.slide .chip{justify-self:start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(79,140,255,.18);color:var(--a)}
+.slide .num{font-size:28px;font-weight:800;color:var(--ink)}
+.ctrl{display:flex;justify-content:center;gap:12px;margin-top:22px}
+.cert-img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--gb);cursor:zoom-in}
+
+/* parcours */
+.parcours-content{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.parcours-column>h3{margin-bottom:20px;display:flex;gap:10px;align-items:center}
+.parcours-column>h3 i{color:var(--b)}
+.timeline{border-left:2px solid var(--gb);margin-left:6px;display:grid;gap:18px}
+.timeline-item{position:relative;padding-left:24px}
+.timeline-item::before{content:"";position:absolute;left:-8px;top:24px;width:14px;height:14px;border-radius:50%;background:var(--a);border:3px solid var(--bg)}
+.timeline-item.exp::before{background:var(--b)}
+.timeline-card{padding:20px;display:grid;gap:4px}
+.timeline-card .when{font-size:13px;font-weight:600;color:var(--b)}
+
+/* projets */
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.project-card{display:flex;flex-direction:column;overflow:hidden;text-align:left;cursor:pointer;font:inherit;color:inherit;padding:0}
+.project-card:hover{border-color:var(--b);transform:translateY(-4px)}
+.project-image{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,rgba(79,140,255,.25),rgba(34,211,238,.15));display:grid;place-items:center;overflow:hidden}
+.project-image>i{font-size:34px;color:var(--b);opacity:.8}
+.project-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.project-content{padding:18px 20px 20px;display:grid;gap:8px;flex:1;align-content:start}
+.project-content p{font-size:14px}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tag{font-size:12px;font-weight:500;padding:3px 10px;border-radius:999px;background:var(--glass);border:1px solid var(--gb);color:var(--muted)}
+.tag-learn-more{color:var(--a);border-color:var(--a)}
+
+/* veille, e5/e6, contact */
+.veille-subtitle{text-align:center;margin:-20px auto 32px;max-width:60ch}
+.veille-conclusion,.epreuves-box{padding:28px;margin-top:32px;display:grid;gap:10px}
+.epreuves-box{text-align:center;justify-items:center}
+.contact-content-centered{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:760px;margin:0 auto}
+.contact-item{padding:22px;display:flex;gap:16px;align-items:center}
+.contact-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(79,140,255,.18);color:var(--a);font-size:18px;flex:none}
+.contact-item h4{font-size:16px}
+.contact-item p,.contact-item a{font-size:14px;overflow-wrap:anywhere;color:var(--muted)}
+
+/* modale et pied de page */
+dialog{border:1px solid var(--gb);border-radius:var(--r);padding:0;width:min(760px,calc(100% - 32px));max-height:86vh;background:var(--bg);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.mbody{padding:32px;display:grid;gap:12px}
+.mbody h2{font-size:28px}
+.mbody h4{font-size:13px;letter-spacing:.08em;color:var(--b);margin-top:8px}
+.mbody ul{padding-left:20px;color:var(--muted);display:grid;gap:4px}
+.mclose{position:sticky;top:10px;float:right;margin:10px 10px 0 0}
+.doc{display:flex;justify-content:space-between;gap:12px;padding:11px 14px;border:1px solid var(--gb);border-radius:10px;font-size:14px;margin-top:6px}
+.doc:hover{border-color:var(--b)}
+.doc em{font-style:normal;color:var(--a);white-space:nowrap}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.gal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--gb);cursor:zoom-in}
+.main-footer{border-top:1px solid var(--gb);margin-top:40px}
+.footer-container{max-width:1120px;margin:0 auto;padding:48px 24px 24px;display:grid;grid-template-columns:2fr 1fr 1.4fr;gap:32px}
+.footer-col h4{font-size:16px;margin-bottom:12px}
+.footer-col p,.footer-col li{font-size:14px;color:var(--muted)}
+.footer-col ul{list-style:none;display:grid;gap:8px}
+.footer-col a:hover{color:var(--b)}
+.footer-bottom{text-align:center;padding:18px;font-size:13px;color:var(--muted);border-top:1px solid var(--gb)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;z-index:99}
+
+@media (max-width:960px){.projects-grid{grid-template-columns:1fr 1fr}.hero-content,.about-content,.parcours-content{grid-template-columns:1fr}.photo{max-width:320px}.footer-container{grid-template-columns:1fr}}
+@media (max-width:860px){.hamburger{display:flex}.nav-menu{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;align-items:stretch;background:var(--bg);padding:12px 24px;border-bottom:1px solid var(--gb)}.nav-menu.open{display:flex}}
+@media (max-width:600px){.projects-grid,.contact-content-centered{grid-template-columns:1fr}.hero-name{font-size:40px}.section-title{font-size:30px}section{padding:56px 0}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <body>
-  <h1>Lenzo</h1>
+<div class="bg-blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+
+<nav class="navbar">
+ <div class="nav-container">
+  <a href="#home" class="nav-logo">L.<b>TOLUAFE</b></a>
+  <ul class="nav-menu" id="menu">
+   <li><a class="nav-link" href="#home">Accueil</a></li><li><a class="nav-link" href="#about">À propos</a></li><li><a class="nav-link" href="#certifications">Certifications</a></li><li><a class="nav-link" href="#parcours">Parcours</a></li><li><a class="nav-link" href="#projects">Projets</a></li><li><a class="nav-link" href="#veille">Veille</a></li><li><a class="nav-link" href="#epreuves">E5 / E6</a></li><li><a class="nav-link" href="#contact">Contact</a></li>
+   <li><button class="icon-btn" id="theme" aria-label="Changer de thème"><i class="fas fa-moon"></i></button></li>
+  </ul>
+  <button class="hamburger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+ </div>
+</nav>
+
+<section id="home" class="hero">
+ <div class="container hero-content">
+  <div>
+   <h1><span class="hero-name"><span>Lenzo</span><span>TOLUAFE</span></span><span class="hero-subtitle">ÉTUDIANT EN BTS SIO - OPTION SISR</span></h1>
+   <p class="hero-description">Alternant à la BCI à Nouméa. Je passe des cuisines à l'infrastructure : postes, support, réseaux et durcissement de serveurs Linux. Demain, la cybersécurité.</p>
+   <div class="hero-buttons">
+    <a href="#about" class="btn btn-primary">Découvrir mon profil</a>
+    <a href="#projects" class="btn">Mes projets</a>
+    <a href="#contact" class="btn">Me contacter</a>
+   </div>
+  </div>
+  <div class="photo"><span>LT</span><img id="pimg" alt="Lenzo Toluafe"></div>
+ </div>
+</section>
+
+<section id="about">
+ <div class="container">
+  <h2 class="section-title">À propos de moi</h2>
+  <div class="about-content">
+   <div class="glass about-text">
+    <h3>Lenzo TOLUAFE</h3>
+    <p>Étudiant en BTS SIO option SISR à Nouméa, je me spécialise dans les solutions d'infrastructure, les systèmes et les réseaux. J'ai été cuisinier professionnel, jusqu'à 400 repas par jour : j'en ai gardé la rigueur et le calme sous pression.</p>
+    <p>Objectif : une licence pro ou une école d'ingénieur en cybersécurité, puis cyber-enquêteur à la Gendarmerie Nationale.</p>
+    <div><a href="CV_Lenzo_TOLUAFE.pdf" class="btn btn-primary" download><i class="fas fa-download"></i> Télécharger mon CV</a></div>
+   </div>
+   <div class="skills">
+    <h4>Mes compétences</h4>
+    <div class="skill-cards-grid" id="skills"></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="certifications">
+ <div class="container">
+  <h2 class="section-title">Certifications</h2>
+  <div class="track" id="t-cert">
+   <div class="glass slide"><img class="cert-img" alt="Attestation Cisco NetAcad" data-c="cisco"><span class="chip">Cisco NetAcad</span><h3>Plus de 100 h</h3><p>4 modules de 22 h, Packet Tracer (2 h) et support réseau (12 h).</p></div>
+   <div class="glass slide"><img class="cert-img" alt="Attestation MOOC RGPD" data-c="rgpd"><span class="chip">CNIL · 29/05/2025</span><h3>MOOC RGPD</h3><p>Module 1 : 93 %, module 2 : 82 %, module 3 : 93 %.</p></div>
+   <div class="glass slide"><img class="cert-img" alt="Résultats PIX" data-c="pix"><span class="chip">PIX</span><h3>Compétences numériques</h3><p>Recherche et analyse niveau 6, résolution technique 4, publication numérique 4, sécurisation 2.</p></div>
+  </div>
+  <div class="ctrl"><button class="icon-btn" data-t="t-cert" data-d="-1" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button><button class="icon-btn" data-t="t-cert" data-d="1" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button></div>
+ </div>
+</section>
+
+<section id="parcours">
+ <div class="container">
+  <h2 class="section-title">Mon parcours</h2>
+  <div class="parcours-content">
+   <div class="parcours-column">
+    <h3><i class="fas fa-graduation-cap"></i> Formation</h3>
+    <div class="timeline">
+     <div class="timeline-item"><div class="glass timeline-card"><h4>BTS SIO option SISR</h4><span class="when">2025 - 2027</span><p>Lycée Dick Ukeiwe, Nouméa. Solutions d'infrastructure, systèmes et réseaux, en alternance.</p></div></div>
+     <div class="timeline-item"><div class="glass timeline-card"><h4>Bac STMG option SIG</h4><span class="when">2024</span><p>Lycée Dick Ukeiwe. Systèmes d'information de gestion.</p></div></div>
+     <div class="timeline-item"><div class="glass timeline-card"><h4>Brevet des collèges</h4><span class="when">2021</span><p>Collège de Tuband.</p></div></div>
+    </div>
+   </div>
+   <div class="parcours-column">
+    <h3><i class="fas fa-briefcase"></i> Expérience</h3>
+    <div class="timeline">
+     <div class="timeline-item exp"><div class="glass timeline-card"><h4>Alternant, Pôle Infrastructure</h4><span class="when">2025 - 2027 · BCI</span><p>Pool BUILD, sous-service PDT : déploiement de postes, support N1/N2/N3, téléphonie IP, imprimantes, procédures.</p></div></div>
+     <div class="timeline-item exp"><div class="glass timeline-card"><h4>Stage</h4><span class="when">27 octobre - 28 novembre 2025 · BCI</span><p>Obtenu après un speed-meeting étudiants-entreprises, il a débouché sur l'alternance.</p></div></div>
+     <div class="timeline-item exp"><div class="glass timeline-card"><h4>Cuisinier professionnel</h4><span class="when">Avant l'informatique</span><p>Jusqu'à 400 repas par jour : rythme, anticipation, travail d'équipe.</p></div></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="projects">
+ <div class="container">
+  <h2 class="section-title">Mes projets</h2>
+  <div class="projects-grid" id="pgrid"></div>
+ </div>
+</section>
+
+<section id="veille">
+ <div class="container">
+  <h2 class="section-title">Veille technologique</h2>
+  <div class="veille-subtitle"><h3>Le Zero Trust</h3><p>Ne jamais faire confiance par défaut, toujours vérifier. Suivi depuis avril 2026.</p></div>
+  <div class="track" id="t-veille">
+   <div class="glass slide"><span class="chip">Zscaler</span><p class="num">65 %</p><p>des entreprises veulent remplacer leur VPN.</p></div>
+   <div class="glass slide"><span class="chip">Zscaler</span><p class="num">81 %</p><p>prévoient de mettre en place le Zero Trust.</p></div>
+   <div class="glass slide"><span class="chip">Zscaler</span><p class="num">+427 %</p><p>d'attaques assistées par IA contre les VPN.</p></div>
+   <div class="glass slide"><span class="chip">SecurityWeek</span><p class="num">207 jours</p><p>sans IA : période de référence citée dans l'étude.</p></div>
+   <div class="glass slide"><span class="chip">Check Point</span><p class="num">29 %</p><p>des attaques ciblent l'industrie.</p></div>
+  </div>
+  <div class="ctrl"><button class="icon-btn" data-t="t-veille" data-d="-1" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button><button class="icon-btn" data-t="t-veille" data-d="1" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button></div>
+  <div class="glass veille-conclusion"><h3>Ma méthode</h3><p>Feedly pour centraliser les flux, LinkedIn pour suivre les acteurs, sites éditeurs (Zscaler, Cisco, SecurityWeek, Check Point). Consultation chaque vendredi, notes classées par date. Côté juridique : CNIL, ANSSI et Union européenne.</p></div>
+ </div>
+</section>
+
+<section id="epreuves">
+ <div class="container">
+  <h2 class="section-title">Épreuves E5 et E6</h2>
+  <div class="glass epreuves-box">
+   <p>Tableau de synthèse E5 et situations professionnelles E6.</p>
+   <div class="hero-buttons">
+    <a class="btn btn-primary" href="https://docs.google.com/spreadsheets/d/1AWuU7FZz8hIBfFHLDOk7yv1JexT72PAFCt7fyPh7UBU/edit" target="_blank" rel="noopener">Tableau E5</a>
+    <button class="btn" onclick="openP('rocky')">E6 · Rocky Linux 10</button>
+    <button class="btn" onclick="openP('tp31')">E6 · ACL Cisco 881</button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="contact">
+ <div class="container">
+  <h2 class="section-title">Me contacter</h2>
+  <div class="contact-content-centered">
+   <div class="glass contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:lenzotoluafe1@gmail.com">lenzotoluafe1@gmail.com</a></div></div>
+   <div class="glass contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Localisation</h4><p>Nouméa, Nouvelle-Calédonie</p></div></div>
+  </div>
+ </div>
+</section>
+
+<dialog id="dlg"><button class="icon-btn mclose" onclick="dlg.close()" aria-label="Fermer"><i class="fas fa-times"></i></button><div class="mbody" id="dbody"></div></dialog>
+<dialog id="lbd"><button class="icon-btn mclose" onclick="lbd.close()" aria-label="Fermer"><i class="fas fa-times"></i></button><img id="lbi" alt="Capture agrandie" style="width:100%;display:block"></dialog>
+
+<footer class="main-footer">
+ <div class="footer-container">
+  <div class="footer-col"><h4>Lenzo TOLUAFE</h4><p>Étudiant en informatique et réseaux, spécialisé en solutions d'infrastructure. Je ne publie aucune donnée interne de la BCI.</p></div>
+  <div class="footer-col"><h4>Liens rapides</h4><ul><li><a href="#home">Accueil</a></li><li><a href="#projects">Projets</a></li><li><a href="#contact">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:lenzotoluafe1@gmail.com"><i class="fas fa-envelope"></i> lenzotoluafe1@gmail.com</a></li><li><i class="fas fa-map-marker-alt"></i> Nouméa, Nouvelle-Calédonie</li></ul></div>
+ </div>
+ <div class="footer-bottom">© 2026 Lenzo TOLUAFE. Site pédagogique, aucun cookie de suivi.</div>
+</footer>
+
+<script>
+/* photo : essaie plusieurs noms et dossiers */
+(function(){var im=document.getElementById("pimg"),n=["images/photo.png","images/photo.jpg","images/photo.jpeg","images/photo.webp","images/Photo.png","images/Photo.jpg","photo.png","photo.jpg","photo.jpeg","image/photo.png","img/photo.png","assets/photo.png"],i=0;
+function nx(){if(i>=n.length){im.remove();return}im.src=n[i++]}
+im.onload=function(){im.classList.add("ok")};im.onerror=nx;nx()})();
+
+/* menu, thème, sliders */
+var menu=document.getElementById("menu");
+document.getElementById("burger").onclick=function(){menu.classList.toggle("open")};
+menu.addEventListener("click",function(e){if(e.target.closest("a"))menu.classList.remove("open")});
+var root=document.documentElement,tb=document.getElementById("theme");
+function setTheme(t){root.setAttribute("data-theme",t);tb.innerHTML='<i class="fas fa-'+(t==="dark"?"moon":"sun")+'"></i>';try{localStorage.setItem("lt-theme",t)}catch(e){}}
+var st="dark";try{st=localStorage.getItem("lt-theme")||"dark"}catch(e){}setTheme(st);
+tb.onclick=function(){setTheme(root.getAttribute("data-theme")==="dark"?"light":"dark")};
+document.querySelectorAll("[data-t]").forEach(function(b){b.onclick=function(){var t=document.getElementById(b.dataset.t);t.scrollBy({left:(+b.dataset.d)*(t.firstElementChild.offsetWidth+18),behavior:"smooth"})}});
+var secs=[].slice.call(document.querySelectorAll("section[id]")),links=document.querySelectorAll(".nav-link");
+addEventListener("scroll",function(){var y=scrollY+120,cur=secs[0].id;secs.forEach(function(s){if(s.offsetTop<=y)cur=s.id});links.forEach(function(l){l.classList.toggle("active",l.getAttribute("href")==="#"+cur)})});
+
+/* compétences */
+var SK=[["fa-ticket-alt","Ticketing","Prise en charge des tickets dans CESAM et ServiceNow : diagnostic, résolution ou escalade, suivi jusqu'à la clôture."],["fa-cubes","Virtualisation","VM sur vSphere pour mon projet d'alternance (snapshots à chaque phase) et Proxmox en cours."],["fa-users-cog","Active Directory","Jonction d'un serveur Rocky Linux au domaine (realm, sssd), comptes et groupes."],["fa-network-wired","Réseaux","VLAN, trunk 802.1Q, routage inter-VLAN, plan d'adressage."],["fa-project-diagram","Packet Tracer et GNS3","Simulation de réseaux, puis reprise de la configuration sur du matériel réel."],["fa-terminal","Linux (Rocky)","Installation, LVM, durcissement, Nginx, MariaDB, PHP-FPM et WordPress."],["fa-shield-alt","Sécurité","SELinux, firewalld, PAM, auditd, SSH, ACL, RGPD, méthode DIC."],["fa-boxes","Inventaire","OCS Inventory et GLPI : parc d'environ 30 postes cartographié."]];
+var sg=document.getElementById("skills");
+SK.forEach(function(s){var b=document.createElement("button");b.className="skill-card";b.innerHTML='<i class="fas '+s[0]+'"></i><span class="skill-name">'+s[1]+'</span><span class="more">En savoir plus...</span>';b.onclick=function(){show('<h2>'+s[1]+'</h2><p>'+s[2]+'</p>')};sg.appendChild(b)});
+
+/* projets */
+var F="https://drive.google.com/file/d/";
+var DOCS={
+S28:[["Feuille de route","1THp9KZWY2FgJBf0M8DXvI6CZRS46MOrm"],["Livrable 1","1pGhgUUXR4a8WVpDaBAIrGGqBwvrhwyCi"],["Livrable 2 · Configuration du pare-feu","1YAiOhEbfGdL2LegNAso_i8YQgQ2TQBcX"],["Commandes préparées et exécutées","1gSkp-_9RQSyMlN-4ixtlfhfT2sVVf3o7"],["Restauration de la configuration","1n-a_A4dop-pbqgGBo4S0flLHGwawaVyE"]],
+S29:[["Feuille de route","1akXNGptGeiAbje4Y2CK1xo11VtuCB2nb"],["Livrable 1 · Avant toute manipulation","1jV2CVxoNTqJ3Qrb93HWeWz4JMKLF708h"],["Livrable 2 · Après toute manipulation","1dlp5JwTE4U3dCpwA0HQvm-y7C_iwlnfQ"],["Commandes utilisées","1igFSeSpa7aUcMP43LSPr0gDQxuoThVhq"],["Procédure de restauration","1xoVkToaB7lkyJlm8_nyQXR0I2IwNcjBR"]],
+S30:[["Évaluation en aval · Cycle 1 VLAN","1boLyuncsPdaYYRXuBqcX9WjKECFEXAmQ"]],
+S31:[["Feuille de route","1t7YHOL4UWC8GseP_ZYh9Cz4-tjSlCh15"],["Livrable 1 · État des lieux","1kLdldW47bj443fxe8sLZv7WgFdZLnCG9"],["Livrable 2 · Configuration des ACL","1--lqiNy3dsMe-bV3GHzbivS4lBJMF6mv"],["Commandes préparées et exécutées","15WpqomdVu1moHFEnTtNcgnL_pjkzi_Dt"],["Restauration de la configuration","1_5u8efaMCi1y7Omz4lYx74IY__7uMNJ2"]],
+S32:[["Livrable 1 · État des lieux","1XzG7arAEUGbw4EtCa7cbFmhuCcMrCUrJ"],["Livrable 2 · Mise en œuvre","1Dl6QaeJdkizSGlkfmQ-TsLBtAmDpnf_r"],["Livrables 3 et 4 · Tests et incident","1VJnLmb3HrL_5duL-cv5KC66uYlbYlxdu"],["Restauration de la configuration","1ebyszUjRNLQE9bvZQCbor1Wor3uoLm1f"]],
+S33:[["Livrable 1 · Avant toute manipulation","1w8M0UjnyJ5nDIiEd7lb3vOkLghFnvbk5"],["Livrable 2 · Mise en œuvre","18DYAY1Z768jnYt4jwAc0IXzRYa1YpLfE"],["Livrables 3 et 4 · Tests et incident","1A4pJSylaxueLPin3vo6GAmQPrCa4BQJh"]],
+E5:[["Guide du projet d'alternance IFR-LZO-DEV-01 (v3)","1Cs5fWgHjOHD5YrZMajNSyRUAwmIsA2qa"]]};
+var P={
+rocky:{t:"Durcissement Rocky Linux 10",ic:"fa-server",tags:["Linux","Sécurité","Alternance"],s:"Sécurisation d'une VM en 6 phases, puis stack LEMP et WordPress.",w:"E5",img:"images/rocky-install.png",
+ d:"Installer une VM Rocky Linux 10.1 sur vSphere, la durcir, l'intégrer à l'Active Directory et lui faire héberger WordPress. Un snapshot après chaque phase.",l:["Installation et LVM","Mise à jour et outils","SELinux, PAM, audit, SNMP, firewalld","sysctl, services, cron, SSH","Compte de service SNOW et sudo","IP fixe, certificat, jonction AD","Nginx, MariaDB, PHP-FPM, WordPress"],i:["images/rocky-install.png","images/rocky-selinux.png","images/rocky-firewall.png","images/rocky-ad-join.png"]},
+tp28:{t:"MikroTik · restriction du laboratoire",ic:"fa-ban",tags:["Réseau","Sécurité"],s:"Une règle de pare-feu coupe la sortie du laboratoire par ether1.",w:"S28",d:"Empêcher 192.168.40.0/24 de sortir par ether1 sur un RB2011 (RouterOS 6.49.20), 24 → 28 août 2026.",l:["Chaîne forward, source 192.168.40.0/24, sortie ether1, drop","Vérification : règles et journal LAB-BLOCK","Retour arrière par le commentaire de la règle","Export .rsc, route par défaut et NAT rétablis"]},
+tp29:{t:"ER605 · isolement du laboratoire",ic:"fa-layer-group",tags:["Réseau","Sécurité"],s:"Quatre VLAN et deux ACL pour isoler le laboratoire.",w:"S29",d:"Segmenter en 4 VLAN sur un TP-Link ER605 et isoler le laboratoire, en gardant son accès Internet.",l:["VLAN 10 infrastructure, 20 SISR, 30 SLAM, 40 laboratoire","ACL LAB_DENY_SISR et LAB_DENY_SERVEURS","Règle désactivée puis recréée, avec rapport","Restauration en 5 minutes"]},
+tp31:{t:"Cisco 881 · ACL service Web",ic:"fa-globe",tags:["Réseau","Sécurité"],s:"Une ACL étendue ne laisse passer que HTTP et HTTPS.",w:"S31",d:"Ne laisser passer que le web entre SISR (VLAN 20) et l'infrastructure (VLAN 10), sur un routeur Cisco 881.",l:["Interface Fa4 remontée, ancienne ACL supprimée","ACL_SISR_WEB_ONLY : HTTP et HTTPS vers 172.16.10.10","Autres flux vers l'infrastructure bloqués","Commandes préparées, exécutées, puis restauration"]},
+tp32:{t:"ER605 · administration réservée",ic:"fa-user-shield",tags:["Réseau","Sécurité"],s:"Administration réservée au poste enseignant.",w:"S32",d:"Réserver l'administration du réseau au poste de l'enseignant, en conditions d'épreuve.",l:["Network Isolation sur les VLAN 20, 30 et 40","PROF_ONLY_ADMIN avant DENY_ALL_TO_VLAN10","Réservation DHCP par MAC, 192.168.10.15","Limite : une ACL ne filtre pas le trafic vers l'IP du routeur"]},
+tp33:{t:"MikroTik · isolement par filtrage",ic:"fa-fire",tags:["Réseau","Sécurité"],s:"Trois règles, des compteurs et un incident d'ordre de règles.",w:"S33",d:"Interdire au laboratoire l'accès à l'infrastructure tout en gardant Internet, preuves par compteurs.",l:["LAB-DENY-INFRA et LAB-ALLOW-INTERNET (forward)","LAB-DENY-GW-INFRA (input)","Une autorisation placée avant le refus le rend inopérant","Export, remise à zéro, import, nouveaux tests"]}};
+function esc(s){return String(s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function show(h){document.getElementById("dbody").innerHTML=h;if(!dlg.open)dlg.showModal()}
+function openP(k){var p=P[k],h='<h2>'+esc(p.t)+'</h2><p>'+esc(p.d)+'</p><h4>DÉROULÉ</h4><ul>'+p.l.map(function(x){return'<li>'+esc(x)+'</li>'}).join("")+'</ul>';
+ var gi=p.i||[1,2,3,4].map(function(n){return'images/'+k+'-'+n+'.png'});h+='<h4>CAPTURES</h4><div class="gal">'+gi.map(function(u){return'<img src="'+u+'" alt="Capture" loading="lazy" data-z="'+u+'" onerror="this.remove()">'}).join("")+'</div>';
+ var d=DOCS[p.w||""];h+='<h4>DOCUMENTS</h4>';
+ h+=d?d.map(function(x){return'<a class="doc" href="'+F+x[1]+'/view" target="_blank" rel="noopener"><span>'+esc(x[0])+'</span><em>Ouvrir ↗</em></a>'}).join(""):'<p>Aucun document déposé pour l\'instant.</p>';
+ show(h)}
+document.getElementById("dbody").addEventListener("click",function(e){var z=e.target.dataset&&e.target.dataset.z;if(z){lbi.src=z;lbd.showModal()}});
+dlg.addEventListener("click",function(e){if(e.target===dlg)dlg.close()});
+lbd.addEventListener("click",function(e){if(e.target===lbd)lbd.close()});
+var pg=document.getElementById("pgrid");
+Object.keys(P).forEach(function(k){var p=P[k],b=document.createElement("button");b.className="glass project-card";
+ b.innerHTML='<div class="project-image"><i class="fas '+p.ic+'"></i><img alt="" loading="lazy"></div><div class="project-content"><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p><div class="project-tags">'+p.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'<span class="tag tag-learn-more">En savoir plus...</span></div></div>';
+ b.onclick=function(){openP(k)};pg.appendChild(b);cover(b.querySelector('img'),k,p.img)});
+function cover(im,k,first){var c=['png','jpg','jpeg','webp'].map(function(e){return'images/'+k+'.'+e});if(first)c.unshift(first);var i=0;im.onerror=function(){if(i>=c.length)im.remove();else im.src=c[i++]};im.onerror()}
+/* certifications : images/certifications/cisco, rgpd, pix (.png .jpg .jpeg .webp) */
+document.querySelectorAll('.cert-img').forEach(function(im){cover(im,'certifications/'+im.dataset.c);im.addEventListener('click',function(){lbi.src=im.src;lbd.showModal()})});
+/* CV : cherche le PDF sous plusieurs noms quand le site est en ligne */
+(function(){var cv=document.querySelectorAll('a[href*="CV_Lenzo"]');cv.forEach(function(a){a.target="_blank";a.rel="noopener"});
+if(location.protocol.indexOf("http")!==0)return;
+var n=["CV_Lenzo_TOLUAFE.pdf","CV_Lenzo_Toluafe.pdf","CV.pdf","cv.pdf","CV Lenzo TOLUAFE.pdf","assets/CV_Lenzo_TOLUAFE.pdf","assets/CV.pdf"],i=0;
+function t(){if(i>=n.length)return;var u=n[i++];fetch(u,{method:"HEAD"}).then(function(r){if(r.ok)cv.forEach(function(a){a.href=u});else t()}).catch(t)}t()})();
+</script>
 </body>
 </html>
