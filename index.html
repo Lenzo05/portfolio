@@ -72,7 +72,9 @@ h3{font-size:20px;font-weight:700}
 .slide .chip{justify-self:start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:rgba(79,140,255,.18);color:var(--a)}
 .slide .num{font-size:28px;font-weight:800;color:var(--ink)}
 .ctrl{display:flex;justify-content:center;gap:12px;margin-top:22px}
-.cert-img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--gb);cursor:zoom-in}
+.cert-gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
+.cert-img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--gb);cursor:zoom-in}
+.cert-logo{height:40px;width:auto;max-width:150px;object-fit:contain;justify-self:start;border-radius:8px}
 
 /* parcours */
 .parcours-content{display:grid;grid-template-columns:1fr 1fr;gap:32px}
@@ -187,9 +189,9 @@ dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
  <div class="container">
   <h2 class="section-title">Certifications</h2>
   <div class="track" id="t-cert">
-   <div class="glass slide"><img class="cert-img" alt="Attestation Cisco NetAcad" data-c="cisco"><span class="chip">Cisco NetAcad</span><h3>Plus de 100 h</h3><p>4 modules de 22 h, Packet Tracer (2 h) et support réseau (12 h).</p></div>
-   <div class="glass slide"><img class="cert-img" alt="Attestation MOOC RGPD" data-c="rgpd"><span class="chip">CNIL · 29/05/2025</span><h3>MOOC RGPD</h3><p>Module 1 : 93 %, module 2 : 82 %, module 3 : 93 %.</p></div>
-   <div class="glass slide"><img class="cert-img" alt="Résultats PIX" data-c="pix"><span class="chip">PIX</span><h3>Compétences numériques</h3><p>Recherche et analyse niveau 6, résolution technique 4, publication numérique 4, sécurisation 2.</p></div>
+   <div class="glass slide"><img class="cert-logo" alt="Cisco" data-f="logo-cisco"><span class="chip">Cisco NetAcad</span><h3>Plus de 100 h</h3><p>4 modules de 22 h, Packet Tracer (2 h) et support réseau (12 h).</p><div class="cert-gal"><img class="cert-img" alt="Certificat Cisco" data-f="cisco-certificat,cisco-certificate,cisco-certificats"><img class="cert-img" alt="Cisco Packet Tracer" data-f="cisco-packet-tracer"></div></div>
+   <div class="glass slide"><img class="cert-logo" alt="CNIL" data-f="logo-cnil"><span class="chip">CNIL · 29/05/2025</span><h3>MOOC RGPD</h3><p>Module 1 : 93 %, module 2 : 82 %, module 3 : 93 %.</p><div class="cert-gal"><img class="cert-img" alt="CNIL module 1" data-f="cnil-module1"><img class="cert-img" alt="CNIL module 2" data-f="cnil-module2"><img class="cert-img" alt="CNIL module 3" data-f="cnil-module3"></div></div>
+   <div class="glass slide"><img class="cert-logo" alt="PIX" data-f="logo-pix"><span class="chip">PIX</span><h3>Compétences numériques</h3><p>Recherche et analyse niveau 6, résolution technique 4, publication numérique 4, sécurisation 2.</p><div class="cert-gal"><img class="cert-img" alt="Score PIX" data-f="pix-score"></div></div>
   </div>
   <div class="ctrl"><button class="icon-btn" data-t="t-cert" data-d="-1" aria-label="Précédent"><i class="fas fa-chevron-left"></i></button><button class="icon-btn" data-t="t-cert" data-d="1" aria-label="Suivant"><i class="fas fa-chevron-right"></i></button></div>
  </div>
@@ -210,7 +212,7 @@ dialog::backdrop{background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
    <div class="parcours-column">
     <h3><i class="fas fa-briefcase"></i> Expérience</h3>
     <div class="timeline">
-     <div class="timeline-item exp"><div class="glass timeline-card"><h4>Alternant, Pôle Infrastructure</h4><span class="when">2025 - 2027 · BCI</span><p>Pool BUILD, sous-service PDT : déploiement de postes, support N1/N2/N3, téléphonie IP, imprimantes, procédures.</p></div></div>
+     <div class="timeline-item exp"><div class="glass timeline-card"><img class="cert-logo" alt="BCI" data-f="logo-bci"><h4>Alternant, Pôle Infrastructure</h4><span class="when">2025 - 2027 · BCI</span><p>Pool BUILD, sous-service PDT : déploiement de postes, support N1/N2/N3, téléphonie IP, imprimantes, procédures.</p></div></div>
      <div class="timeline-item exp"><div class="glass timeline-card"><h4>Stage</h4><span class="when">27 octobre - 28 novembre 2025 · BCI</span><p>Obtenu après un speed-meeting étudiants-entreprises, il a débouché sur l'alternance.</p></div></div>
      <div class="timeline-item exp"><div class="glass timeline-card"><h4>Cuisinier professionnel</h4><span class="when">Avant l'informatique</span><p>Jusqu'à 400 repas par jour : rythme, anticipation, travail d'équipe.</p></div></div>
     </div>
@@ -334,8 +336,9 @@ Object.keys(P).forEach(function(k){var p=P[k],b=document.createElement("button")
  b.innerHTML='<div class="project-image"><i class="fas '+p.ic+'"></i><img alt="" loading="lazy"></div><div class="project-content"><h3>'+esc(p.t)+'</h3><p>'+esc(p.s)+'</p><div class="project-tags">'+p.tags.map(function(t){return'<span class="tag">'+t+'</span>'}).join("")+'<span class="tag tag-learn-more">En savoir plus...</span></div></div>';
  b.onclick=function(){openP(k)};pg.appendChild(b);cover(b.querySelector('img'),k,p.img)});
 function cover(im,k,first){var c=['png','jpg','jpeg','webp'].map(function(e){return'images/'+k+'.'+e});if(first)c.unshift(first);var i=0;im.onerror=function(){if(i>=c.length)im.remove();else im.src=c[i++]};im.onerror()}
-/* certifications : images/certifications/cisco, rgpd, pix (.png .jpg .jpeg .webp) */
-document.querySelectorAll('.cert-img').forEach(function(im){cover(im,'certifications/'+im.dataset.c);im.addEventListener('click',function(){lbi.src=im.src;lbd.showModal()})});
+/* images de certifications et logos : cherche dans images/, images/certifications/, certifications/ et à la racine */
+function find(im,names){var bs=['images/','images/certifications/','certifications/',''],es=['png','jpg','jpeg','webp'],c=[];names.split(',').forEach(function(n){bs.forEach(function(b){es.forEach(function(e){c.push(b+n+'.'+e)})})});var i=0;im.onerror=function(){if(i>=c.length){im.remove()}else im.src=c[i++]};im.onerror()}
+document.querySelectorAll('img[data-f]').forEach(function(im){find(im,im.dataset.f);if(im.classList.contains('cert-img'))im.addEventListener('click',function(){lbi.src=im.src;lbd.showModal()})});
 /* CV : cherche le PDF sous plusieurs noms quand le site est en ligne */
 (function(){var cv=document.querySelectorAll('a[href*="CV_Lenzo"]');cv.forEach(function(a){a.target="_blank";a.rel="noopener"});
 if(location.protocol.indexOf("http")!==0)return;
